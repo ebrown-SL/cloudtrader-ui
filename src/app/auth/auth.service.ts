@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUserSubject = new BehaviorSubject<string>('');
+  private currentUserSubject = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('currentUser')));
   public currentUser = this.currentUserSubject.asObservable();
 
   constructor(private router: Router) {}
@@ -17,12 +17,14 @@ export class AuthService {
 
   login(user) {
     // TODO: Login request to backend
+    localStorage.setItem('currentUser', JSON.stringify(user.name));
     this.currentUserSubject.next(user.name);
     this.router.navigate(['/']);
   }
 
   logout() {
     // TODO: Logout request to backend
+    localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
