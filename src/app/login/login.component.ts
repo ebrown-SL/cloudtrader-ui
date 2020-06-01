@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,9 @@ export class LoginComponent {
     name: new FormControl('')
   });
 
+  constructor(private loginService: LoginService) {}
+
   onSubmit() {
-    console.log(this.loginForm.value);
+    this.loginService.login(this.loginForm.value);
   }
 }
