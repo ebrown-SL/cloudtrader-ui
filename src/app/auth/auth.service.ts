@@ -6,18 +6,24 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private _currentUser = new BehaviorSubject<String>('');
-  public currentUser = this._currentUser.asObservable();
+  private currentUserSubject = new BehaviorSubject<string>('');
+  public currentUser = this.currentUserSubject.asObservable();
 
   constructor(private router: Router) {}
 
   isAuthenticated() {
-    return this._currentUser.value ? true : false;
+    return this.currentUserSubject.value ? true : false;
   }
 
   login(user) {
     // TODO: Login request to backend
-    this._currentUser.next(user.name);
+    this.currentUserSubject.next(user.name);
     this.router.navigate(['/']);
+  }
+
+  logout() {
+    // TODO: Logout request to backend
+    this.currentUserSubject.next(null);
+    this.router.navigate(['/login']);
   }
 }

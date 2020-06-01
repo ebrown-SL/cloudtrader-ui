@@ -6,7 +6,7 @@ import { AuthService } from '../auth/auth.service';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  currentUser: String;
+  currentUser: string;
 
   constructor(private authService: AuthService) {
     this.authService.currentUser.subscribe(currentUser => this.currentUser = currentUser);
