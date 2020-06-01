@@ -6,7 +6,7 @@
         <h1>Cloud Trader</h1>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
             <div class="form-group">
-                <input type="text" class="form-control" formControlName="name" placeholder="Name">
+                <input type="text" class="form-control" formControlName="name" placeholder="Name" autofocus>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
