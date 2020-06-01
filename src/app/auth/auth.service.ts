@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  currentUser: string;
+  private _currentUser = new BehaviorSubject<String>('');
+  public currentUser = this._currentUser.asObservable();
 
   constructor(private router: Router) {}
 
-  login(credentials) {
+  isAuthenticated() {
+    return this._currentUser.value ? true : false;
+  }
+
+  login(user) {
     // TODO: Login request to backend
-    this.currentUser = credentials.name;
+    this._currentUser.next(user.name);
     this.router.navigate(['/']);
   }
 }
