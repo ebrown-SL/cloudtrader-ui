@@ -17,8 +17,8 @@ export class AuthService {
 
   login(user) {
     // TODO: Login request to backend
-    localStorage.setItem('currentUser', JSON.stringify(user.name));
-    this.currentUserSubject.next(user.name);
+    localStorage.setItem('currentUser', JSON.stringify(user.username));
+    this.currentUserSubject.next(user.username);
     this.router.navigate(['/']);
   }
 

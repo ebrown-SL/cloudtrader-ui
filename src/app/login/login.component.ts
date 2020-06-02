@@ -9,7 +9,8 @@ import { AuthService } from '../auth/auth.service';
 })
 export class LoginComponent {
   loginForm = new FormGroup({
-    name: new FormControl('')
+    username: new FormControl(''),
+    password: new FormControl('')
   });
 
   constructor(private authService: AuthService) {}
