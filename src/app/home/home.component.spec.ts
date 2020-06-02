@@ -6,15 +6,16 @@ import { BehaviorSubject } from 'rxjs';
 import { HomeComponent } from './home.component';
 import { AuthService } from '../auth/auth.service';
 import { LogoutComponent } from '../logout/logout.component';
+import { User } from '../shared/models/user.model';
 
 describe('HomeComponent', () => {
   let fixture: ComponentFixture<HomeComponent>;
   let authServiceStub: Partial<AuthService>;
 
-  let currentUserSubjectStub: BehaviorSubject<string>;
+  let currentUserSubjectStub: BehaviorSubject<User>;
 
   beforeEach(async(() => {
-    currentUserSubjectStub = new BehaviorSubject<string>('');
+    currentUserSubjectStub = new BehaviorSubject<User>(null);
     authServiceStub = {
       currentUser: currentUserSubjectStub.asObservable()
     };
@@ -36,7 +37,7 @@ describe('HomeComponent', () => {
   }));
 
   it('should display the name of the current user', () => {
-    currentUserSubjectStub.next('username');
+    currentUserSubjectStub.next({ id: 0, username: 'username', balance: 0, token: '' });
 
     fixture.detectChanges();
 

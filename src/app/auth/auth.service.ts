@@ -1,25 +1,34 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+
+import { environment } from '../../environments/environment';
+import { User } from '../shared/models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUserSubject = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('currentUser')));
-  public currentUser = this.currentUserSubject.asObservable();
+  private currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+  public readonly currentUser = this.currentUserSubject.asObservable();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private httpClient: HttpClient
+  ) {}
 
-  isAuthenticated() {
-    return this.currentUserSubject.value ? true : false;
+  getToken() {
+    return this.currentUserSubject.value ? this.currentUserSubject.value.token : null;
   }
 
-  login(user) {
-    // TODO: Login request to backend
-    localStorage.setItem('currentUser', JSON.stringify(user.username));
-    this.currentUserSubject.next(user.username);
-    this.router.navigate(['/']);
+  login(credentials) {
+    this.httpClient.post(`${environment.baseUrl}/api/trader/login`, credentials)
+    .subscribe((user: User) => {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.currentUserSubject.next(user);
+      this.router.navigate(['/']);
+    });
   }
 
   logout() {

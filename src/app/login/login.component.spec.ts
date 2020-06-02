@@ -8,8 +8,11 @@ import { AuthService } from '../auth/auth.service';
 
 describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
+  let authServiceStub: Partial<AuthService>;
 
   beforeEach(async(() => {
+    authServiceStub = {};
+
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -19,7 +22,7 @@ describe('LoginComponent', () => {
         LoginComponent
       ],
       providers: [
-        AuthService
+        { provide: AuthService, useValue: authServiceStub }
       ],
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(LoginComponent);
@@ -47,7 +50,7 @@ describe('LoginComponent', () => {
   });
 
   it('should call AuthService login() method with correct object when submit button is clicked', () => {
-    const loginSpy = spyOn(fixture.debugElement.injector.get(AuthService), 'login');
+    authServiceStub.login = jasmine.createSpy();
 
     fixture.detectChanges();
 
@@ -62,6 +65,6 @@ describe('LoginComponent', () => {
     const submitButton = fixture.debugElement.query(By.css('button')).nativeElement;
     submitButton.click();
 
-    expect(loginSpy).toHaveBeenCalledWith({ username: 'admin', password: 'password' });
+    expect(authServiceStub.login).toHaveBeenCalledWith({ username: 'admin', password: 'password' });
   });
 });

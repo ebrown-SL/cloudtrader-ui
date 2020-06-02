@@ -1,5 +1,6 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, inject } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 
 import { LogoutComponent } from './logout.component';
@@ -7,17 +8,21 @@ import { AuthService } from '../auth/auth.service';
 
 describe('LogoutComponent', () => {
   let fixture: ComponentFixture<LogoutComponent>;
+  let authServiceStub: Partial<AuthService>;
 
   beforeEach(async(() => {
+    authServiceStub = {};
+
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule
       ],
       declarations: [
         LogoutComponent
       ],
       providers: [
-        AuthService
+        { provide: AuthService, useValue: authServiceStub }
       ],
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(LogoutComponent);
@@ -25,11 +30,11 @@ describe('LogoutComponent', () => {
   }));
 
   it('should call AuthService logout() method when button is clicked', () => {
-    const logoutSpy = spyOn(fixture.debugElement.injector.get(AuthService), 'logout');
+    authServiceStub.logout = jasmine.createSpy();
 
     const button = fixture.debugElement.query(By.css('button')).nativeElement;
     button.click();
 
-    expect(logoutSpy).toHaveBeenCalled();
+    expect(authServiceStub.logout).toHaveBeenCalled();
   });
 });
