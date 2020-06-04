@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { User } from '../shared/models/user.model';
+import { Credentials } from '../shared/models/credentials.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +23,15 @@ export class AuthService {
     return this.currentUserSubject.value ? this.currentUserSubject.value.token : null;
   }
 
-  login(credentials) {
-    this.httpClient.post(`${environment.baseUrl}/api/trader/login`, credentials)
+  register(credentials: Credentials) {
+    this.httpClient.post(`${environment.baseUrl}/register`, credentials)
+    .subscribe(() => {
+      this.router.navigate(['/login']);
+    });
+  }
+
+  login(credentials: Credentials) {
+    this.httpClient.post(`${environment.baseUrl}/login`, credentials)
     .subscribe((user: User) => {
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);

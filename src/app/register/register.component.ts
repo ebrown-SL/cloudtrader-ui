@@ -4,14 +4,14 @@ import { AuthService } from '../auth/auth.service';
 import { Credentials } from '../shared/models/credentials.model';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent {
+export class RegisterComponent {
   constructor(private authService: AuthService) {}
 
   onSubmit(credentials: Credentials) {
-    this.authService.login(credentials);
+    this.authService.register(credentials);
   }
 }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://ebdb3b12-68fa-4351-ac1c-30a377f6dfb6.mock.pstmn.io'
+  baseUrl: 'https://localhost:5001/api/trader'
 };
 
 /*

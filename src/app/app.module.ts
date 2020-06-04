@@ -9,13 +9,17 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { RegisterComponent } from './register/register.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    RegisterComponent,
+    LoginFormComponent
   ],
   imports: [
     AppRoutingModule,

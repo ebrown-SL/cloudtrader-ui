@@ -3,29 +3,22 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { LoginComponent } from './login.component';
-import { AuthService } from '../auth/auth.service';
+import { LoginFormComponent } from './login-form.component';
 
-describe('LoginComponent', () => {
-  let fixture: ComponentFixture<LoginComponent>;
-  let authServiceStub: Partial<AuthService>;
+describe('LoginFormComponent', () => {
+  let fixture: ComponentFixture<LoginFormComponent>;
 
   beforeEach(async(() => {
-    authServiceStub = {};
-
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
         ReactiveFormsModule
       ],
       declarations: [
-        LoginComponent
-      ],
-      providers: [
-        { provide: AuthService, useValue: authServiceStub }
+        LoginFormComponent
       ],
     }).compileComponents().then(() => {
-      fixture = TestBed.createComponent(LoginComponent);
+      fixture = TestBed.createComponent(LoginFormComponent);
     });
   }));
 
@@ -46,11 +39,11 @@ describe('LoginComponent', () => {
     usernameControl.value = 'admin';
     usernameControl.dispatchEvent(new Event('input'));
 
-    expect(fixture.componentInstance.loginForm.value.username).toEqual('admin');
+    expect(fixture.componentInstance.form.value.username).toEqual('admin');
   });
 
-  it('should call AuthService login() method with correct object when submit button is clicked', () => {
-    authServiceStub.login = jasmine.createSpy();
+  it('should emit a submit event with correct object when submit button is clicked', () => {
+    const submitFormSpy = spyOn(fixture.componentInstance.submitForm, 'emit');
 
     fixture.detectChanges();
 
@@ -65,6 +58,6 @@ describe('LoginComponent', () => {
     const submitButton = fixture.debugElement.query(By.css('button')).nativeElement;
     submitButton.click();
 
-    expect(authServiceStub.login).toHaveBeenCalledWith({ username: 'admin', password: 'password' });
+    expect(submitFormSpy).toHaveBeenCalledWith({ username: 'admin', password: 'password' });
   });
 });
