@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { AuthService } from '../auth/auth.service';
-import { Credentials } from '../shared/models/credentials.model';
 
 @Component({
   selector: 'app-register',
@@ -9,9 +9,14 @@ import { Credentials } from '../shared/models/credentials.model';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  form = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });
+
   constructor(private authService: AuthService) {}
 
-  onSubmit(credentials: Credentials) {
-    this.authService.register(credentials);
+  onSubmit() {
+    this.authService.register(this.form.value);
   }
 }

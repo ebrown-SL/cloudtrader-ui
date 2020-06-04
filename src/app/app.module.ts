@@ -10,7 +10,6 @@ import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { RegisterComponent } from './register/register.component';
-import { LoginFormComponent } from './login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +17,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
     HomeComponent,
     LoginComponent,
     LogoutComponent,
-    RegisterComponent,
-    LoginFormComponent
+    RegisterComponent
   ],
   imports: [
     AppRoutingModule,

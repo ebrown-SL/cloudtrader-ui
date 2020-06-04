@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { AuthService } from '../auth/auth.service';
-import { Credentials } from '../shared/models/credentials.model';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +9,14 @@ import { Credentials } from '../shared/models/credentials.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  form = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });
+
   constructor(private authService: AuthService) {}
 
-  onSubmit(credentials: Credentials) {
-    this.authService.login(credentials);
+  onSubmit() {
+    this.authService.login(this.form.value);
   }
 }
