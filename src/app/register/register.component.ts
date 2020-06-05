@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,13 +15,24 @@ export class RegisterComponent {
     password: new FormControl('', [Validators.required])
   });
 
-  constructor(private authService: AuthService) {}
+  serverError: string;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   get username() { return this.registerForm.get('username'); }
 
   get password() { return this.registerForm.get('password'); }
 
   onSubmit() {
-    this.authService.register(this.registerForm.value);
+    this.serverError = '';
+    this.authService.register(this.registerForm.value)
+    .subscribe(() => {
+      this.router.navigate(['/']);
+    }, err => {
+      this.serverError = err.error.message;
+    });
   }
 }

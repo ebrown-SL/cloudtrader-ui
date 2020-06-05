@@ -24,10 +24,7 @@ export class AuthService {
   }
 
   register(credentials: Credentials) {
-    this.httpClient.post(`${environment.baseUrl}/register`, credentials)
-    .subscribe(() => {
-      this.router.navigate(['/login']);
-    });
+    return this.httpClient.post(`${environment.baseUrl}/register`, credentials);
   }
 
   login(credentials: Credentials) {
