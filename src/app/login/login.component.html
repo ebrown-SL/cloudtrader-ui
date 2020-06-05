@@ -17,6 +17,11 @@
           Please provide a password.
         </div>
       </div>
+      <div *ngIf="serverError" class="form-group">
+        <div class="alert alert-danger" role="alert">
+          {{ serverError }}
+        </div>
+      </div>
       <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Login</button>
     </form>
     <a href="/register" class="small">Register</a>

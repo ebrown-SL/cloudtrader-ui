@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { User } from '../shared/models/user.model';
@@ -28,12 +29,11 @@ export class AuthService {
   }
 
   login(credentials: Credentials) {
-    this.httpClient.post(`${environment.baseUrl}/login`, credentials)
-    .subscribe((user: User) => {
+    return this.httpClient.post(`${environment.baseUrl}/login`, credentials)
+    .pipe(tap((user: User) => {
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);
-      this.router.navigate(['/']);
-    });
+    }));
   }
 
   logout() {
