@@ -17,7 +17,7 @@
           Please provide a password.
         </div>
       </div>
-      <div *ngIf="serverError" class="form-group">
+      <div *ngIf="serverError" id="server-error" class="form-group">
         <div class="alert alert-danger" role="alert">
           {{ serverError }}
         </div>
