@@ -1,0 +1,29 @@
+[{
+  "mineCity": "Bristol",
+  "mineLat": "51.454514",
+  "mineLng": "-2.587910",
+  "mineCloudNumber": "210",
+  "minePrice": 19.95
+},
+{
+  "mineCity": "London",
+  "mineLat": "51.509865",
+  "mineLng": "-0.118092",
+  "mineCloudNumber": "108",
+  "minePrice": 12.54
+},
+{
+  "mineCity": "Newcastle",
+  "mineLat": "54.966667",
+  "mineLng": "-1.600000",
+  "mineCloudNumber": "255",
+  "minePrice": 28.70
+},
+{
+  "mineCity": "Edinburgh",
+  "mineLat": "55.950558",
+  "mineLng": "-3.185556",
+  "mineCloudNumber": "378",
+  "minePrice": 42.38
+}
+]

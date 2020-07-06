@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Lat</th>
+            <th>Lng</th>
+            <th>No. of Clouds</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let mine of mines'>
+            <td>{{mine.mineCity}}</td>
+            <td>{{mine.mineLat}}</td>
+            <td>{{mine.mineLng}}</td>
+            <td>{{mine.mineCloudNumber}}</td>
+            <td>{{mine.minePrice | currency:'USD':'symbol':'1.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
