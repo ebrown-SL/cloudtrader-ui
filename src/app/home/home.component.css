@@ -1,6 +1,17 @@
-.header {
+.app {
   display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.header {
+  flex: 0 1 auto;
+  display: flex;
+  flex-flow: row;
   justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid;
 }
 
 .header-title {
@@ -25,4 +36,22 @@
 
 .logout-button {
   margin: 15px;
+}
+
+.main {
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.menu {
+  padding: 10px;
+  width: 20%;
+  height: 100%;
+  border-right: 1px solid;
+}
+
+.content {
+  padding: 10px;
+  width: 70%
 }
