@@ -11,6 +11,9 @@ import { HomeComponent } from './home/home.component';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { CloudMineListComponent } from './cloudMineList/cloud-mine-list.component'
+import { RouterModule } from '@angular/router';
+import { MenuComponent } from './home/menu/menu.component';
+import { DashboardComponent } from './home/dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { CloudMineListComponent } from './cloudMineList/cloud-mine-list.componen
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
-    CloudMineListComponent
+    CloudMineListComponent,
+    MenuComponent,
+    DashboardComponent
   ],
   imports: [
     AppRoutingModule,
