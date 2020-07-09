@@ -4,6 +4,7 @@ import { throwError } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
 import { environment } from '../../environments/environment';
 import * as localMines from './mine-data.json'
+import { IMine } from './cloud-mine';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class CloudMineService {
     )
   }
 
-  getLocalCloudMines(): any {
+  getLocalCloudMines(): IMine[] {
     return (localMines as any).default
   }
 

@@ -5,24 +5,23 @@
         <table class="table">
           <thead>
             <tr>
-              <th>City</th>
+              <th>Name</th>
               <th>Lat</th>
               <th>Lng</th>
-              <th>No. of Clouds</th>
-              <th>Price</th>
+              <th>Temperature</th>
+              <th>Stock</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor='let mine of mines'>
-              <td>{{mine.mineCity}}</td>
-              <td>{{mine.mineLat}}</td>
-              <td>{{mine.mineLng}}</td>
-              <td>{{mine.mineCloudNumber}}</td>
-              <td>{{mine.minePrice | currency:'USD':'symbol':'1.2-2'}}</td>
+              <td>{{mine.name}}</td>
+              <td>{{mine.coordinates.latitude}}</td>
+              <td>{{mine.coordinates.longitude}}</td>
+              <td>{{mine.temperature}}</td>
+              <td>{{mine.stock}}</td>
             </tr>
           </tbody>
         </table>
       </div>
-    <!-- </div> -->
   </div>
 </div>
