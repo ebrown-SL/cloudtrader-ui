@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CloudMineService } from './cloud-mine-list.service'
+import { IMine } from './cloud-mine';
 
 @Component({
   selector: 'cloud-mine-list',
@@ -10,7 +11,7 @@ import { CloudMineService } from './cloud-mine-list.service'
 export class CloudMineListComponent implements OnInit{
   pageTitle: string = 'Cloud Mines';
   listFilter: string = 'cart';
-  mines: any[];
+  mines: IMine[];
 
   constructor(private cloudMineService: CloudMineService) {
   }
@@ -22,5 +23,6 @@ export class CloudMineListComponent implements OnInit{
     //   }
     // })
     this.mines = this.cloudMineService.getLocalCloudMines()
+    console.log(this.mines)
   }
 }
