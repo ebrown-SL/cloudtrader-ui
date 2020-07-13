@@ -17,11 +17,6 @@ export class CloudMineListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // this.cloudMineService.getLocalCloudMines().subscribe({
-    //   next: mines => {
-    //     this.mines = mines;
-    //   }
-    // })
     this.mines = this.cloudMineService.getLocalCloudMines()
     console.log(this.mines)
   }
