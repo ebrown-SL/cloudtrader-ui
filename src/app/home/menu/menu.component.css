@@ -1,6 +1,7 @@
 .nav-link {
   font-size: x-large;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .nav-link:hover {
