@@ -10,7 +10,6 @@ import { IMine } from './cloud-mine';
 
 export class CloudMineListComponent implements OnInit{
   pageTitle: string = 'Cloud Mines';
-  listFilter: string = 'cart';
   mines: IMine[];
 
   constructor(private cloudMineService: CloudMineService) {
@@ -18,6 +17,5 @@ export class CloudMineListComponent implements OnInit{
 
   ngOnInit(): void {
     this.mines = this.cloudMineService.getLocalCloudMines()
-    console.log(this.mines)
   }
 }
