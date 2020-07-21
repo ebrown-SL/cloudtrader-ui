@@ -7,7 +7,10 @@
       <h1>Cloud Trader</h1>
     </div>
     <div class="user-header">
-      <p class="user-info" id="current-user">Logged in as: {{ currentUser.username }}</p>
+      <div class="user-info" id="current-user">
+        <div><b>User:</b> {{ currentUser.username }}</div>
+        <div><b>Balance:</b> {{ currentUser.balance | currency:'GBP':'symbol':'1.2-2' }}</div>
+      </div>
       <app-logout class="logout-button"></app-logout>
     </div>
   </div>
