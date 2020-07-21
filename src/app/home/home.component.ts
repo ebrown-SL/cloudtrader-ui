@@ -11,13 +11,11 @@ import { User } from '../shared/models/user.model';
 })
 export class HomeComponent implements OnInit {
   currentUser: User;
-  selectedTab: string = '';
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.currentUser.subscribe(currentUser => this.currentUser = currentUser);
   }
 
   ngOnInit() {
-    console.log(this.router.url)
   }
 }
