@@ -1,5 +1,10 @@
 <div class="container">
-  <h1>Cloud Trader</h1>
-  <p id="current-user">Logged in as: {{ currentUser.username }}</p>
-  <app-logout></app-logout>
+  <div class="header">
+    <h1 class="header-title">Cloud Trader</h1>
+    <div class="user-header">
+      <p class="user-info" id="current-user">Logged in as: {{ currentUser.username }}</p>
+      <app-logout class="logout-button"></app-logout>
+    </div>
+  </div>
+  <cloud-mine-list></cloud-mine-list>
 </div>
