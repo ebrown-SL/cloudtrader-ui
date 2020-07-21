@@ -15,7 +15,6 @@ export class CloudMineService {
 
   getCloudMines(): any {
     return this.httpClient.get(`${environment.baseUrl}/api/mine`).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     )
   }
@@ -31,7 +30,6 @@ export class CloudMineService {
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.log(errorMessage)
     return throwError(errorMessage)
   }
 }
