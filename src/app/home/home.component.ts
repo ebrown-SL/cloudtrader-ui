@@ -17,5 +17,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser.balance = 200
   }
 }
