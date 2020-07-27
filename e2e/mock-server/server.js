@@ -23,8 +23,8 @@ app.use('/authentication/', api);
 https
   .createServer(
     {
-      key: fs.readFileSync('./key.pem', 'utf8'),
-      cert: fs.readFileSync('./server.crt', 'utf8'),
+      key: fs.readFileSync('./mock-key.pem', 'utf8'),
+      cert: fs.readFileSync('./mock-server.crt', 'utf8'),
     },
     app
   )
