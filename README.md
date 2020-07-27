@@ -20,7 +20,34 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Install mock server dependencies:
+
+```bash
+cd e2e/mock-server
+npm i
+```
+
+Run the mock server (from cloudtrader UI directory):
+
+```bash
+npm run mock:server
+```
+
+Execute the end-to-end tests via [Protractor](http://www.protractortest.org/):
+
+```bash
+ng e2e
+#OR
+npm run e2e
+```
+
+To run the development server using the mock server proxy settings:
+
+```bash
+ng start:proxy
+#OR
+npm run start:proxy
+```
 
 ## Running with docker
 

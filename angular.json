@@ -71,6 +71,9 @@
           "configurations": {
             "production": {
               "browserTarget": "cloudtrader-ui:build:production"
+            },
+            "e2e": {
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },
@@ -114,7 +117,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "cloudtrader-ui:serve"
+            "devServerTarget": "cloudtrader-ui:serve:e2e"
           },
           "configurations": {
             "production": {
