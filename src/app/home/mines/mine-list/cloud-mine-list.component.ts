@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CloudMineService } from './cloud-mine-list.service'
-import { IMine } from './cloud-mine';
+import { CloudMineService } from '../mines.service'
+import { IMine } from '../../../shared/models/mine.model';
 
 @Component({
   selector: 'cloud-mine-list',

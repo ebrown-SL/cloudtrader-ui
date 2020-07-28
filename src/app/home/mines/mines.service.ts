@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { throwError } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import * as localMines from './mine-data.json'
-import { IMine } from './cloud-mine';
+import { IMine } from '../../shared/models/mine.model';
 
 @Injectable({
   providedIn: 'root'

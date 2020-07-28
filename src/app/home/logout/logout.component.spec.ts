@@ -4,7 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 
 import { LogoutComponent } from './logout.component';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 
 describe('LogoutComponent', () => {
   let fixture: ComponentFixture<LogoutComponent>;
