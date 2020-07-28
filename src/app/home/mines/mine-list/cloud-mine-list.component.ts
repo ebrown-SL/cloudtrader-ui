@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CloudMineService } from '../mines.service'
-import { IMine } from '../../../shared/models/mine.model';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'cloud-mine-list',
@@ -8,14 +8,14 @@ import { IMine } from '../../../shared/models/mine.model';
   styleUrls: ['./cloud-mine-list.component.css']
 })
 
-export class CloudMineListComponent implements OnInit{
+export class CloudMineListComponent {
   pageTitle: string = 'Cloud Mines';
-  mines: IMine[];
 
   constructor(private cloudMineService: CloudMineService) {
   }
 
-  ngOnInit(): void {
-    this.mines = this.cloudMineService.getLocalCloudMines()
-  }
+  mines$ = this.cloudMineService.mines$
+    .pipe(
+      tap(data => console.log('Mines: ', JSON.stringify(data)))
+    )
 }
