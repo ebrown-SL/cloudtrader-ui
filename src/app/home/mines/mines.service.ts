@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { throwError } from 'rxjs'
+import { throwError, of } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
-import { environment } from '../../environments/environment';
-import * as localMines from './mine-data.json'
-import { IMine } from './cloud-mine';
+import { environment } from '../../../environments/environment';
+import localMines from './mine-data.json'
+import { IMine } from '../../shared/models/mine.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,13 @@ export class CloudMineService {
   }
 
   getLocalCloudMines(): IMine[] {
-    return (localMines as any).default
+    return localMines
   }
+
+  mines$ = of(this.getLocalCloudMines())
+    .pipe(
+      tap(data => JSON.stringify(data))
+    )
 
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';

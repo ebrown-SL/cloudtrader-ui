@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { RegisterComponent } from './register/register.component';
-import { CloudMineListComponent } from './cloudMineList/cloud-mine-list.component';
+import { CloudMineListComponent } from './home/mines/mine-list/cloud-mine-list.component'
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 
 const routes: Routes = [
