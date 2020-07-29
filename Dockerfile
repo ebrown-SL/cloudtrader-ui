@@ -7,7 +7,7 @@ COPY package-lock.json /app/package-lock.json
 RUN npm install
 
 COPY . /app
-RUN npm run build
+RUN npm run buildp
 
 FROM nginx:1.18.0-alpine
 
