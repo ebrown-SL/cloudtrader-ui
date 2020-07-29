@@ -24,9 +24,6 @@ export class CloudMineService {
   }
 
   mines$ = of(this.getLocalCloudMines())
-    .pipe(
-      tap(data => JSON.stringify(data))
-    )
 
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
