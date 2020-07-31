@@ -15,4 +15,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=builder /app/dist/cloudtrader-ui /usr/share/nginx/html
 
+CMD ["/bin/sh",  "-c",  "envsubst < /usr/share/nginx/html/assets/settings.template.json > /usr/share/nginx/html/assets/settings.json && exec nginx -g 'daemon off;'"]
+
 EXPOSE 80

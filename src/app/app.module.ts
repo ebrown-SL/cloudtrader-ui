@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER  } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +13,12 @@ import { RegisterComponent } from './register/register.component';
 import { CloudMineListComponent } from './home/mines/mine-list/cloud-mine-list.component'
 import { RouterModule } from '@angular/router';
 import { MenuComponent } from './home/menu/menu.component';
-import { DashboardComponent } from './home/dashboard/dashboard.component'
+import { DashboardComponent } from './home/dashboard/dashboard.component';
+import { SettingsHttpService } from './settings/settings.http.service';
+
+export function app_Init(settingsHttpService: SettingsHttpService) {
+    return () => settingsHttpService.initializeApp();
+}
 
 @NgModule({
   declarations: [
@@ -38,7 +43,13 @@ import { DashboardComponent } from './home/dashboard/dashboard.component'
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+      },
+      {
+          provide: APP_INITIALIZER,
+          useFactory: app_Init,
+          deps: [SettingsHttpService],
+          multi: true
+      }
   ],
   bootstrap: [AppComponent]
 })
