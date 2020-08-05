@@ -1,0 +1,4 @@
+{
+    "productionBuild": false,
+    "apiUrl": "https://localhost:5001"
+}
