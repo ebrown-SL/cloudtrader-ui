@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http'
 import { AuthService } from '../auth/auth.service';
 import { User } from '../shared/models/user.model';
 import { environment } from '../../environments/environment';
-import { Trader } from './trader.model';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +17,7 @@ export class HomeComponent {
     this.authService.currentUser.subscribe(currentUser => this.currentUser = currentUser)
   }
 
-  trader$ = this.httpClient.get<Trader>(`${environment.baseUrl}/frontend/currentUserBalance`)
+  balance$ = this.httpClient.get<number>(`${environment.baseUrl}/user/current/balance`)
+  .subscribe(balance => this.currentUser.balance = balance)
 
 }
