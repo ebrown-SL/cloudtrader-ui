@@ -1,0 +1,27 @@
+<div *ngIf='mines$ | async as mines'>
+  <h1 class="title">{{ pageTitle }}</h1>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Lat</th>
+              <th>Lng</th>
+              <th>Temperature</th>
+              <th>Stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let mine of mines'>
+              <td>{{mine.name}}</td>
+              <td>{{mine.coordinates.latitude}}</td>
+              <td>{{mine.coordinates.longitude}}</td>
+              <td>{{mine.temperature}}</td>
+              <td>{{mine.stock}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

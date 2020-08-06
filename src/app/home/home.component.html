@@ -1,5 +1,25 @@
-<div class="container">
-  <h1>Cloud Trader</h1>
-  <p id="current-user">Logged in as: {{ currentUser.username }}</p>
-  <app-logout></app-logout>
+<div class="app">
+  <div class="header">
+    <div class="header-title">
+      <svg class="bi bi-cloud" width="80px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M4.887 7.2l-.964-.165A2.5 2.5 0 1 0 3.5 12h10a1.5 1.5 0 0 0 .237-2.981L12.7 8.854l.216-1.028a4 4 0 1 0-7.843-1.587l-.185.96zm9.084.341a5 5 0 0 0-9.88-1.492A3.5 3.5 0 1 0 3.5 13h9.999a2.5 2.5 0 0 0 .394-4.968c.033-.16.06-.324.077-.49z"/>
+      </svg>
+      <h1>Cloud Trader</h1>
+    </div>
+    <div class="user-header">
+      <div class="user-info" id="current-user">
+        <div><b>User:</b> {{ currentUser.username }}</div>
+        <div><b>Balance:</b> {{ currentUser.balance | currency:'GBP':'symbol':'1.2-2' }}</div>
+      </div>
+      <app-logout class="logout-button"></app-logout>
+    </div>
+  </div>
+  <div class="main">
+    <div class="menu">
+      <app-menu></app-menu>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
