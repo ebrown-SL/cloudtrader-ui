@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   register(credentials: Credentials) {
-    return this.httpClient.post(`${environment.baseUrl}/authentication/register`, credentials)
+    return this.httpClient.post(`/authentication/register`, credentials)
     .pipe(tap((user: User) => {
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);
@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   login(credentials: Credentials) {
-    return this.httpClient.post(`${environment.baseUrl}/authentication/login`, credentials)
+    return this.httpClient.post(`/authentication/login`, credentials)
     .pipe(tap((user: User) => {
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);

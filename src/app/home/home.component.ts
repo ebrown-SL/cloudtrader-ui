@@ -14,10 +14,13 @@ export class HomeComponent {
   currentUser: User;
 
   constructor(private authService: AuthService, private httpClient: HttpClient) {
-    this.authService.currentUser.subscribe(currentUser => this.currentUser = currentUser)
+
+    this.authService.currentUser
+      .subscribe(currentUser => this.currentUser = currentUser)
+
+    this.httpClient.get<number>(`/user/current/balance`)
+      .subscribe(balance => this.currentUser.balance = balance)
+
   }
-
-  balance$ = this.httpClient.get<number>(`${environment.baseUrl}/user/current/balance`)
-  .subscribe(balance => this.currentUser.balance = balance)
-
+  
 }

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { SettingsService } from "./settings.service";
 import { Settings } from "./settings";
 
@@ -11,9 +11,13 @@ export class SettingsHttpService {
 
     initializeApp(): Promise<any> {
 
+        const requestHeaders = new HttpHeaders().set('Exact-Url', 'true')
+
         return new Promise(
             (resolve) => {
-                this.http.get('assets/settings.json')
+                this.http.get('assets/settings.json', {
+                    headers: requestHeaders
+                })
                     .toPromise()
                     .then(response => {
                         this.settingsService.settings = <Settings>response;
