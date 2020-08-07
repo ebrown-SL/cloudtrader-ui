@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
-import { environment } from '../../environments/environment';
 import { User } from '../shared/models/user.model';
 import { Credentials } from '../shared/models/credentials.model';
 
