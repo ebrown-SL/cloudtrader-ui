@@ -15,7 +15,4 @@ export class CloudMineListComponent {
   }
 
   mines$ = this.cloudMineService.mines$
-    .pipe(
-      tap(data => console.log('Mines: ', JSON.stringify(data)))
-    )
 }
