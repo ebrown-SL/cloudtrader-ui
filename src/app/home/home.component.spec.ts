@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { HomeComponent } from './home.component';
 import { AuthService } from '../auth/auth.service';
-import { LogoutComponent } from '../logout/logout.component';
+import { LogoutComponent } from './logout/logout.component';
 import { User } from '../shared/models/user.model';
 
 describe('HomeComponent', () => {
@@ -42,6 +42,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
 
     const currentUser = fixture.debugElement.query(By.css('#current-user')).nativeElement;
+    console.log(currentUser)
     expect(currentUser.textContent).toContain('username');
   });
 });
