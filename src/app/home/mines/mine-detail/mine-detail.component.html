@@ -1,0 +1,85 @@
+<div class="header">
+  <h1>Mine details</h1>
+  <button class="btn btn-secondary back" (click)="back()">Back</button>
+</div>
+<div class="row">
+  <div class="col col-md-4">
+    <h3>Name</h3>
+    <span>{{ mine.name }}</span>
+  </div>
+  <div class="col col-md-4">
+    <h3>Stock</h3>
+    <span>{{ mine.stock }}</span>
+  </div>
+  <div class="col col-md-4">
+    <h3>Temperature</h3>
+    <span>{{ mine.temperature | number: '1.1-1' }}</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col col-md-4">
+    <h3>Location</h3>
+    <div class="coordinates">
+      <span>Latitude: {{ mine.coordinates.latitude }}</span>
+      <span>Longitude: {{ mine.coordinates.longitude }}</span>
+    </div>
+  </div>
+  <div class="col col-md-8">
+    <h3>Buy</h3>
+    <form>
+      <div class="form-row align-items-center">
+        <div class="col-2">
+          <label for="buyStock">Stock</label>
+          <input
+            name="buyStock"
+            type="number"
+            class="form-control mb-2"
+            id="buyStock"
+            placeholder="0"
+            [(ngModel)]="buyStock"
+            (input)="updateTotal()"
+          />
+        </div>
+        X
+        <div class="col-2">
+          <label for="price">£/stock</label>
+          <input
+            type="text"
+            class="form-control mb-2"
+            id="price"
+            placeholder="0"
+            disabled
+            value="{{ price }}"
+          />
+        </div>
+        =
+        <div class="col-auto">
+          <label for="inlineFormInputGroup">Total</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">£</div>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="inlineFormInputGroup"
+              placeholder="0.00"
+              value="{{ total }}"
+            />
+            <div class="input-group-append">
+              <button
+                disabled="{{ blockBuy }}"
+                class="btn btn-outline-secondary"
+                type="button"
+              >
+                Buy
+              </button>
+            </div>
+            {{blockBuy}}
+          </div>
+        </div>
+        <div class="col-auto"></div>
+      </div>
+    </form>
+  </div>
+</div>

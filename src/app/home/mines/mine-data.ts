@@ -1,4 +1,6 @@
-[
+import { IMine } from 'src/app/shared/models/mine.model';
+
+export const MINES: IMine[] = [
   {
     "id": 1,
     "coordinates": {
