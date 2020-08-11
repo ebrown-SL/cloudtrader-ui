@@ -36,7 +36,9 @@
             class="form-control mb-2"
             id="buyStock"
             placeholder="0"
-            [(ngModel)]="buyStock"
+            min="0"
+            max="{{ this.mine.stock }}"
+            [(ngModel)]="stock"
             (input)="updateTotal()"
           />
         </div>
@@ -68,14 +70,14 @@
             />
             <div class="input-group-append">
               <button
-                disabled="{{ blockBuy }}"
+                [disabled]="blockBuy || !total"
                 class="btn btn-outline-secondary"
                 type="button"
+                (click)="buyStock()"
               >
                 Buy
               </button>
             </div>
-            {{blockBuy}}
           </div>
         </div>
         <div class="col-auto"></div>
