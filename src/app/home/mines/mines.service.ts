@@ -5,12 +5,13 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MINES } from './mine-data';
 import { IMine } from '../../shared/models/mine.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CloudMineService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private authService: AuthService) {}
 
   getCloudMines(): Observable<IMine[]> {
     return this.httpClient
@@ -21,6 +22,11 @@ export class CloudMineService {
   getCloudMine(mine: IMine | number): Observable<IMine> {
     // TODO expose endpoint in main API
     return;
+  }
+
+  buyStock(mine: IMine | number, stock: number): Observable<any> {
+    // TODO expose endpoint in main API
+    return of(mine);
   }
 
   /* LOCAL METHODS */
