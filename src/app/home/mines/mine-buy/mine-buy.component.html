@@ -1,0 +1,55 @@
+<form>
+  <div class="form-row align-items-center">
+    <div class="col-2">
+      <label for="buyStock">Stock</label>
+      <input
+        name="buyStock"
+        type="number"
+        class="form-control mb-2"
+        id="buyStock"
+        placeholder="0"
+        min="0"
+        max="{{ this.mine.stock }}"
+        [(ngModel)]="transactionStock"
+        (input)="updateTotal()"
+      />
+    </div>
+    X
+    <div class="col-2">
+      <label for="price">£/stock</label>
+      <input
+        type="text"
+        class="form-control mb-2"
+        id="price"
+        placeholder="0"
+        disabled
+        value="{{ mine.price }}"
+      />
+    </div>
+    =
+    <div class="col-3">
+      <label for="inlineFormInputGroup">Total</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">£</div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          id="inlineFormInputGroup"
+          value="{{ transactionTotal }}"
+        />
+        <div class="input-group-append">
+          <button
+            [disabled]="blockBuy || !transactionTotal"
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="buyStock()"
+          >
+            Buy
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

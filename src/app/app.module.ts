@@ -16,6 +16,7 @@ import { MenuComponent } from './home/menu/menu.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { SettingsHttpService } from './settings/settings.http.service';
 import { MineDetailComponent } from './home/mines/mine-detail/mine-detail.component';
+import { MineBuyComponent } from './home/mines/mine-buy/mine-buy.component';
 
 export function app_Init(settingsHttpService: SettingsHttpService) {
     return () => settingsHttpService.initializeApp();
@@ -31,7 +32,8 @@ export function app_Init(settingsHttpService: SettingsHttpService) {
     CloudMineListComponent,
     MenuComponent,
     DashboardComponent,
-    MineDetailComponent
+    MineDetailComponent,
+    MineBuyComponent
   ],
   imports: [
     AppRoutingModule,
