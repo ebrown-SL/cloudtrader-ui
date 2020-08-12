@@ -7,32 +7,46 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  loginForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
-  });
+  loginForm = new FormGroup(
+    {
+      username: new FormControl('', {
+        validators: [Validators.required],
+        updateOn: 'submit',
+      }),
+      password: new FormControl('', {
+        validators: [Validators.required],
+        updateOn: 'submit',
+      }),
+    },
+    { updateOn: 'submit' }
+  );
 
   serverError: string;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  get username() { return this.loginForm.get('username'); }
+  get username() {
+    return this.loginForm.get('username');
+  }
 
-  get password() { return this.loginForm.get('password'); }
+  get password() {
+    return this.loginForm.get('password');
+  }
 
   onSubmit() {
-    this.serverError = '';
-    this.authService.login(this.loginForm.value)
-    .subscribe(() => {
-      this.router.navigate(['/']);
-    }, err => {
-      this.serverError = err.error.message;
-    });
+    if (this.loginForm.valid) {
+      this.serverError = '';
+      this.authService.login(this.loginForm.value).subscribe(
+        () => {
+          this.router.navigate(['/']);
+        },
+        (err) => {
+          this.serverError = err.error.message;
+        }
+      );
+    }
   }
 }
