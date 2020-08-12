@@ -21,9 +21,11 @@
             <td>{{ mine.coordinates.longitude }}</td>
             <td>{{ mine.temperature }}</td>
             <td>{{ mine.stock }}</td>
-            <td>£1</td>
+            <td>{{ mine.price | currency: '£' }}</td>
             <td>
-              <a routerLink="/home/mines/{{mine.id}}"><button class="btn btn-primary">Buy</button></a>
+              <a routerLink="/home/mines/{{ mine.id }}">
+                <button class="btn btn-primary">Buy</button>
+              </a>
             </td>
           </tr>
         </tbody>
