@@ -4,7 +4,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { passwordValidator } from './passwordValidator';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-register',
