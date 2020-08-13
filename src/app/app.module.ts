@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { MenuComponent } from './home/menu/menu.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { SettingsHttpService } from './settings/settings.http.service';
+import { UserStockComponent } from './home/user-stock/user-stock.component';
 
 export function app_Init(settingsHttpService: SettingsHttpService) {
     return () => settingsHttpService.initializeApp();
@@ -29,7 +30,8 @@ export function app_Init(settingsHttpService: SettingsHttpService) {
     RegisterComponent,
     CloudMineListComponent,
     MenuComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserStockComponent
   ],
   imports: [
     AppRoutingModule,
