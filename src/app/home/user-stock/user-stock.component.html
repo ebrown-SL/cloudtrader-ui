@@ -1,0 +1,22 @@
+<h1 class="title">{{ pageTitle }}</h1>
+<div class="lead">Total stock: {{ getTotalStock() }}</div>
+<div class="mt-3">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Mine ID</th>
+          <th>Mine name</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mine of userMines.cloudStock">
+          <td>{{ mine.mineId }}</td>
+          <td>{{ getMine(mine.mineId).name }}</td>
+          <td>{{ mine.stock }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
