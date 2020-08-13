@@ -1,16 +1,17 @@
-<form>
+<form [formGroup]="buyForm">
   <div class="form-row align-items-center">
     <div class="col-2">
-      <label for="buyStock">Stock</label>
+      <label for="stock">Stock</label>
       <input
-        name="buyStock"
+        name="stock"
         type="number"
         class="form-control mb-2"
-        id="buyStock"
+        id="stock"
         placeholder="0"
+        formControlName="transactionStock"
         min="0"
         max="{{ this.mine.stock }}"
-        [(ngModel)]="transactionStock"
+        [class.is-invalid]="transactionStock.invalid"
         (input)="updateTotal()"
       />
     </div>
@@ -45,6 +46,9 @@
             class="btn btn-outline-secondary"
             type="button"
             (click)="buyStock()"
+            [disabled]="
+              buyForm.invalid || transactionTotal == 0 || buyForm.pristine
+            "
           >
             Buy
           </button>

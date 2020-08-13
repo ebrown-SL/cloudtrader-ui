@@ -1,6 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IMine } from 'src/app/shared/models/mine.model';
 import { CloudMineService } from '../mines.service';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-mine-buy',
@@ -10,35 +16,50 @@ import { CloudMineService } from '../mines.service';
 export class MineBuyComponent implements OnInit {
   @Input() mine: IMine;
   transactionTotal: number;
-  transactionStock: number;
   blockBuy: boolean = false;
+  buyForm: FormGroup;
+
+  get transactionStock(): AbstractControl {
+    return this.buyForm.get('transactionStock');
+  }
 
   constructor(private mineService: CloudMineService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.buyForm = new FormGroup({
+      transactionStock: new FormControl(0, {
+        validators: [Validators.max(this.mine.stock), Validators.min(0)],
+        updateOn: 'change',
+      }),
+    });
+  }
 
   updateTotal(): void {
-    if (this.transactionStock > this.mine.stock || this.transactionStock < 0) {
-      this.transactionStock = this.mine.stock;
-    }
-    this.transactionTotal = this.transactionStock * this.mine.price;
+    this.transactionTotal = this.transactionStock.value * this.mine.price;
+  }
+
+  updateFormAndValidation(): void {
+    const formTransactionStock: AbstractControl = this.buyForm.get(
+      'transactionStock'
+    );
+    formTransactionStock.setValue(0);
+    formTransactionStock.setValidators([
+      Validators.max(this.mine.stock),
+      Validators.min(0),
+    ]);
+    formTransactionStock.updateValueAndValidity();
+    this.updateTotal();
   }
 
   buyStock(): void {
     // TODO update mine stock and balance after purchase
-    this.mineService
-      .buyStock(this.mine, this.transactionStock)
-      .subscribe((_) => {
-        this.mine.stock -= this.transactionStock;
-      });
-    this.updateTotal();
-  }
-
-  isValidPurchase(): void {
-    if (this.transactionStock > this.mine.stock || this.transactionStock < 0) {
-      this.blockBuy = true;
-    } else {
-      this.blockBuy = false;
+    if (this.buyForm.valid) {
+      this.mineService
+        .buyStock(this.mine, this.transactionStock.value)
+        .subscribe((_) => {
+          this.mine.stock -= this.transactionStock.value;
+        });
+      this.updateFormAndValidation();
     }
   }
 }
