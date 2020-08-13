@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { throwError, of } from 'rxjs'
+import { throwError, of, Observable } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
 import { environment } from '../../../environments/environment';
 import localMines from './mine-data.json'
 import { IMine } from '../../shared/models/mine.model';
+import { MineStock } from 'src/app/shared/models/mineStock.model';
+import { USER_STOCK } from '../user-stock/mock-user-mines';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,11 @@ export class CloudMineService {
 
   getLocalCloudMines(): IMine[] {
     return localMines
+  }
+
+  // TODO get from API
+  getUserStock(): Observable<MineStock> {
+    return of(USER_STOCK);
   }
 
   mines$ = of(this.getLocalCloudMines())
