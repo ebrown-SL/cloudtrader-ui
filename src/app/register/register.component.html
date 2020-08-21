@@ -1,20 +1,62 @@
 <div class="container register-container">
   <div class="mx-auto">
-    <svg class="bi bi-cloud" width="80px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" d="M4.887 7.2l-.964-.165A2.5 2.5 0 1 0 3.5 12h10a1.5 1.5 0 0 0 .237-2.981L12.7 8.854l.216-1.028a4 4 0 1 0-7.843-1.587l-.185.96zm9.084.341a5 5 0 0 0-9.88-1.492A3.5 3.5 0 1 0 3.5 13h9.999a2.5 2.5 0 0 0 .394-4.968c.033-.16.06-.324.077-.49z"/>
-    </svg>
-    <h1>Cloud Trader</h1>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+    <div class="header-content">
+      <svg
+        class="bi bi-cloud"
+        width="80px"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M4.887 7.2l-.964-.165A2.5 2.5 0 1 0 3.5 12h10a1.5 1.5 0 0 0 .237-2.981L12.7 8.854l.216-1.028a4 4 0 1 0-7.843-1.587l-.185.96zm9.084.341a5 5 0 0 0-9.88-1.492A3.5 3.5 0 1 0 3.5 13h9.999a2.5 2.5 0 0 0 .394-4.968c.033-.16.06-.324.077-.49z"
+        />
+      </svg>
+      <h1 class="title">Cloud Trader</h1>
+      <h2 class="sub-title">Register</h2>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <input type="text" id="username-control" class="form-control" [class.is-invalid]="username.touched && username.invalid" formControlName="username" placeholder="Username" autofocus>
+        <input
+          type="text"
+          id="username-control"
+          class="form-control"
+          [class.is-invalid]="!registerForm.pristine && username.invalid"
+          formControlName="username"
+          placeholder="Username"
+          autofocus
+        />
         <div class="invalid-feedback">
           Please provide a username.
         </div>
       </div>
       <div class="form-group">
-        <input type="password" id="password-control" class="form-control is-invalid" [class.is-invalid]="password.touched && password.invalid" formControlName="password" placeholder="Password" autofocus>
+        <input
+          type="password"
+          id="password-control"
+          class="form-control is-invalid"
+          [class.is-invalid]="!registerForm.pristine && password.invalid"
+          formControlName="password"
+          placeholder="Password"
+          autofocus
+        />
         <div class="invalid-feedback">
           Please provide a password.
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          id="confirm-password"
+          class="form-control"
+          formControlName="confirmPassword"
+          placeholder="Confirm password"
+          [class.is-invalid]="registerForm.getError('noMatch')"
+          autofocus
+        />
+        <div class="invalid-feedback">
+          The passwords do not match.
         </div>
       </div>
       <div *ngIf="serverError" id="server-error" class="form-group">
@@ -22,8 +64,13 @@
           {{ serverError }}
         </div>
       </div>
-      <button type="submit" class="btn btn-primary btn-block" [disabled]="registerForm.invalid">Register</button>
+      <button type="submit" class="btn btn-primary btn-block">
+        Register
+      </button>
     </form>
-    <a href="/login" class="small">Login</a>
+    <div class="login-info">
+      <div>Already have an account?</div>
+      <a href="/login" class="small">Login</a>
+    </div>
   </div>
 </div>
