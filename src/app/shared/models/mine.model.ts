@@ -6,5 +6,6 @@ export interface IMine {
   }
   temperature: number;
   stock: number;
+  price: number;
   name: string;
 }
