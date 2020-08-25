@@ -24,7 +24,7 @@ export class MineDetailComponent implements OnInit {
   }
 
   getMine(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.mineService
       .getLocalCloudMine(id)
       .subscribe((mine) => (this.mine = mine));

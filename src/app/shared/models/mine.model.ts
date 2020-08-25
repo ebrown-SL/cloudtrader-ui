@@ -1,5 +1,5 @@
 export interface IMine {
-  id: number;
+  id: string;
   coordinates: {
     latitude: number,
     longitude: number

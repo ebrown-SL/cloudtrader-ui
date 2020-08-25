@@ -2,7 +2,7 @@ import { IMine } from 'src/app/shared/models/mine.model';
 
 export const MINES: IMine[] = [
   {
-    id: 1,
+    id: '777ea804-c198-4e04-8791-91242b883aa9',
     coordinates: {
       latitude: 51.454514,
       longitude: -2.58791,
@@ -13,7 +13,7 @@ export const MINES: IMine[] = [
     name: 'Bristol',
   },
   {
-    id: 2,
+    id: '3fa74ee7-fe67-46c8-bd9c-4791de9602e6',
     coordinates: {
       latitude: 51.509865,
       longitude: -0.118092,
@@ -24,7 +24,7 @@ export const MINES: IMine[] = [
     name: 'London',
   },
   {
-    id: 3,
+    id: '59adb437-f6e6-413c-a95c-26d5b050a9ac',
     coordinates: {
       latitude: 54.966667,
       longitude: -1.6,
@@ -35,7 +35,7 @@ export const MINES: IMine[] = [
     name: 'Newcastle',
   },
   {
-    id: 4,
+    id: '381ea51f-d039-42fa-953c-1d7a64fb7239',
     coordinates: {
       latitude: 55.950558,
       longitude: -3.185556,
