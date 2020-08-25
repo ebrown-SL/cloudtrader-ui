@@ -1,27 +1,35 @@
-<div *ngIf='mines$ | async as mines'>
+<div *ngIf="mines">
   <h1 class="title">{{ pageTitle }}</h1>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Lat</th>
-              <th>Lng</th>
-              <th>Temperature</th>
-              <th>Stock</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor='let mine of mines'>
-              <td>{{mine.name}}</td>
-              <td>{{mine.coordinates.latitude}}</td>
-              <td>{{mine.coordinates.longitude}}</td>
-              <td>{{mine.temperature}}</td>
-              <td>{{mine.stock}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Lat</th>
+            <th>Lng</th>
+            <th>Temperature</th>
+            <th>Stock</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mine of mines">
+            <td>{{ mine.name }}</td>
+            <td>{{ mine.coordinates.latitude }}</td>
+            <td>{{ mine.coordinates.longitude }}</td>
+            <td>{{ mine.temperature }}</td>
+            <td>{{ mine.stock }}</td>
+            <td>{{ mine.price | currency: '£' }}</td>
+            <td>
+              <a routerLink="/home/mines/{{ mine.id }}">
+                <button class="btn btn-primary">Buy</button>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
