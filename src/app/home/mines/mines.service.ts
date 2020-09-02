@@ -19,20 +19,20 @@ export class CloudMineService {
       .pipe(catchError(this.handleError));
   }
 
-  getCloudMine(mine: IMine | number): Observable<IMine> {
+  getCloudMine(mine: IMine | string): Observable<IMine> {
     // TODO expose endpoint in main API
     return;
   }
 
-  buyStock(mine: IMine | number, stock: number): Observable<any> {
+  buyStock(mine: IMine | string, stock: number): Observable<any> {
     // TODO expose endpoint in main API
     return of(mine);
   }
 
   /* LOCAL METHODS */
   
-  getLocalCloudMine(mine: IMine | number): Observable<IMine> {
-    const id = typeof mine === 'number' ? mine : mine.id;
+  getLocalCloudMine(mine: IMine | string): Observable<IMine> {
+    const id = typeof mine === 'string' ? mine : mine.id;
     return of(MINES.find((mine) => mine.id == id));
   }
 

@@ -1,5 +1,5 @@
 export class User {
-  id: number;
+  id: string;
   username: string;
   balance: number;
   token: string;

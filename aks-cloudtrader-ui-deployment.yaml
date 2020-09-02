@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cloudtrader-ui
-        image: cloudtrader.azurecr.io/cloudtrader-ui:v1.1
+        image: cloudtrader.azurecr.io/cloudtrader-ui:v2
         ports:
         - containerPort: 80
         env:

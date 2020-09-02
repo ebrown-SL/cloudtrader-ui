@@ -5,10 +5,10 @@ import { throwError, of } from 'rxjs';
 
 import { RegisterComponent } from './register.component';
 import { AuthService } from '../auth/auth.service';
-import { LogoutComponent } from '../home/logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../shared/models/user.model';
+import { LogoutComponent } from '../home/logout/logout.component';
 
 describe('RegisterComponent', () => {
   let fixture: ComponentFixture<RegisterComponent>;
