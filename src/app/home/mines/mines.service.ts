@@ -15,7 +15,7 @@ export class CloudMineService {
 
   getCloudMines(): Observable<IMine[]> {
     return this.httpClient
-      .get<IMine[]>(`${environment.baseUrl}/api/mine`)
+      .get<IMine[]>(`/mine`)
       .pipe(catchError(this.handleError));
   }
 
@@ -31,7 +31,7 @@ export class CloudMineService {
       quantity: stock,
       purchaseAmount
     }
-    this.httpClient.post((`${environment.baseUrl}/api/User/current/stock/buy`), transaction)
+    this.httpClient.post((`/User/current/stock/buy`), transaction)
       .pipe(catchError(this.handleError));
     return of(mine);
   }
