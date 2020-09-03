@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, of, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MINES } from './mine-data';
 import { IMine } from '../../shared/models/mine.model';
@@ -16,7 +16,9 @@ export class CloudMineService {
   getCloudMines(): Observable<IMine[]> {
     return this.httpClient
       .get<IMine[]>(`/mine`)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map(data => data['mines']),
+        catchError(this.handleError));
   }
 
   getCloudMine(mine: IMine | string): Observable<IMine> {
