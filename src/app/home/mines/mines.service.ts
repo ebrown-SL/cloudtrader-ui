@@ -5,13 +5,13 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MINES } from './mine-data';
 import { IMine } from '../../shared/models/mine.model';
-import { AuthService } from 'src/app/auth/auth.service';
+import { MinePurchase } from '../../shared/models/purchase.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CloudMineService {
-  constructor(private httpClient: HttpClient, private authService: AuthService) {}
+  constructor(private httpClient: HttpClient) { }
 
   getCloudMines(): Observable<IMine[]> {
     return this.httpClient
@@ -24,13 +24,20 @@ export class CloudMineService {
     return;
   }
 
-  buyStock(mine: IMine | string, stock: number): Observable<any> {
-    // TODO expose endpoint in main API
+  buyStock(mine: IMine, stock: number): Observable<any> {
+    const purchaseAmount = mine.price * stock;
+    const transaction: MinePurchase = {
+      mineId: mine.id,
+      quantity: stock,
+      purchaseAmount
+    }
+    this.httpClient.post((`${environment.baseUrl}/api/User/current/stock/buy`), transaction)
+      .pipe(catchError(this.handleError));
     return of(mine);
   }
 
   /* LOCAL METHODS */
-  
+
   getLocalCloudMine(mine: IMine | string): Observable<IMine> {
     const id = typeof mine === 'string' ? mine : mine.id;
     return of(MINES.find((mine) => mine.id == id));
