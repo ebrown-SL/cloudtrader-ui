@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError, of, Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { throwError, of, Observable, BehaviorSubject } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MINES } from './mine-data';
 import { IMine } from '../../shared/models/mine.model';
 import { MinePurchase } from '../../shared/models/purchase.model';
+import { CloudStock } from 'src/app/shared/models/cloud.model';
+import { STOCK_DATA } from './stock-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CloudMineService {
+  private currentUserStockSubject = new BehaviorSubject<CloudStock[]>(JSON.parse(localStorage.getItem('currentUserStock')));
+  public readonly currentUserStock = this.currentUserStockSubject.asObservable();
+
   constructor(private httpClient: HttpClient) { }
 
   getCloudMines(): Observable<IMine[]> {
@@ -21,9 +26,11 @@ export class CloudMineService {
         catchError(this.handleError));
   }
 
-  getCloudMine(mine: IMine | string): Observable<IMine> {
-    // TODO expose endpoint in main API
-    return;
+  getCloudMine(mineId: string): Observable<IMine> {
+    return this.httpClient.get<IMine>(`/mine/${mineId}`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   buyStock(mine: IMine, stock: number): Observable<any> {
@@ -33,9 +40,21 @@ export class CloudMineService {
       quantity: stock,
       purchaseAmount
     }
-    this.httpClient.post((`/User/current/stock/buy`), transaction)
-      .pipe(catchError(this.handleError));
-    return of(mine);
+    return this.httpClient.post((`/User/current/stock/buy`), transaction)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getUserStock(): Observable<CloudStock[]> {
+    return this.httpClient.get('/User/current/stock')
+      .pipe(
+        tap((userStock: CloudStock[]) => {
+          localStorage.setItem('currentUserStock', JSON.stringify(userStock));
+          this.currentUserStockSubject.next(userStock);
+        }),
+        catchError(this.handleError)
+      );
   }
 
   /* LOCAL METHODS */
@@ -47,6 +66,10 @@ export class CloudMineService {
 
   getLocalCloudMines(): Observable<IMine[]> {
     return of(MINES);
+  }
+
+  getLocalUserStock(): Observable<CloudStock[]> {
+    return of(STOCK_DATA);
   }
 
   /* END LOCAL METHODS */

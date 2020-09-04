@@ -7,6 +7,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-mine-buy',
@@ -23,7 +24,7 @@ export class MineBuyComponent implements OnInit {
     return this.buyForm.get('transactionStock');
   }
 
-  constructor(private mineService: CloudMineService) {}
+  constructor(private mineService: CloudMineService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.buyForm = new FormGroup({
@@ -52,12 +53,12 @@ export class MineBuyComponent implements OnInit {
   }
 
   buyStock(): void {
-    // TODO update mine stock and balance after purchase
     if (this.buyForm.valid) {
       this.mineService
         .buyStock(this.mine, this.transactionStock.value)
         .subscribe((_) => {
           this.mine.stock -= this.transactionStock.value;
+          this.authService.getUserBalance().subscribe();
         });
       this.updateFormAndValidation();
     }

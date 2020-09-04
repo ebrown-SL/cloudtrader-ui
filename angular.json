@@ -126,6 +126,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "cloudtrader-ui"
+    }
+  },
+  "defaultProject": "cloudtrader-ui",
+  "cli": {
+    "analytics": "0e91d9ef-f26b-4939-a7e6-447a78492acb"
+  }
 }

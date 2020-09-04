@@ -11,7 +11,7 @@ export class CloudMineListComponent implements OnInit {
   pageTitle: string = 'Cloud Mines';
   mines: IMine[];
 
-  constructor(private cloudMineService: CloudMineService) {}
+  constructor(private cloudMineService: CloudMineService) { }
 
   ngOnInit(): void {
     this.getMines();
@@ -19,7 +19,7 @@ export class CloudMineListComponent implements OnInit {
 
   getMines(): void {
     this.cloudMineService
-      .getLocalCloudMines()
+      .getCloudMines()
       .subscribe((mines) => (this.mines = mines));
   }
 }

@@ -1,5 +1,5 @@
 <div class="header">
-  <h1>Mine details</h1>
+  <h1>{{mine.name | uppercase}} Mine Details</h1>
   <button class="btn btn-secondary back" (click)="back()">Back</button>
 </div>
 <div class="row">
@@ -24,8 +24,17 @@
       <span>Longitude: {{ mine.coordinates.longitude }}</span>
     </div>
   </div>
-  <div class="col-md-8">
-    <h3>Buy</h3>
+  <div class="col-md-4">
+    <h3>Price</h3>
+    <span>{{ mine.price | currency:'GBP'}}</span>
+  </div>
+  <div class="col-md-4">
+    <h3>My stock</h3>
+    <span>{{userStock | number}}</span>
+  </div>
+</div>
+<div class="row">
+  <div class='col'>
     <app-mine-buy [mine]="mine"></app-mine-buy>
   </div>
 </div>
