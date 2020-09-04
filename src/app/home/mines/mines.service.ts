@@ -45,7 +45,6 @@ export class CloudMineService {
         catchError(this.handleError)
       );
   }
-
   getUserStock(): Observable<CloudStock[]> {
     return this.httpClient.get('/User/current/stock')
       .pipe(
@@ -69,7 +68,13 @@ export class CloudMineService {
   }
 
   getLocalUserStock(): Observable<CloudStock[]> {
-    return of(STOCK_DATA);
+    console.log(STOCK_DATA());
+    return of(STOCK_DATA())
+      .pipe(
+        tap((userStock: CloudStock[]) => {
+          localStorage.setItem('currentUserStock', JSON.stringify(userStock));
+          this.currentUserStockSubject.next(userStock);
+        }));
   }
 
   /* END LOCAL METHODS */

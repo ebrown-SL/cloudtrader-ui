@@ -36,6 +36,7 @@ export class AuthService {
     return this.httpClient.post(`/authentication/register`, credentials)
       .pipe(tap((user: User) => {
         localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('currentUserStock', JSON.stringify({}));
         this.currentUserSubject.next(user);
       }));
   }

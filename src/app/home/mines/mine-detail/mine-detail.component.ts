@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { IMine } from '../../../shared/models/mine.model';
 import { CloudMineService } from '../mines.service';
 import { CloudStock } from 'src/app/shared/models/cloud.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mine-detail',
@@ -38,7 +39,7 @@ export class MineDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.mineService
       .getLocalUserStock()
-      .subscribe(userMineStock => this.userStock = userMineStock.find(stock => stock.mineId === id).stock);
+      .subscribe(userStock => this.userStock = userStock.find(cloud => cloud.mineId === id).stock);
   }
 
   back(): void {
