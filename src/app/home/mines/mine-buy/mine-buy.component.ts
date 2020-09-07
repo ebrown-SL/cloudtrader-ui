@@ -59,7 +59,7 @@ export class MineBuyComponent implements OnInit {
         .subscribe((_) => {
           this.mine.stock -= this.transactionStock.value;
           this.authService.getUserBalance().subscribe();
-          this.mineService.getLocalUserStock().subscribe();
+          this.mineService.getUserStock().subscribe();
         });
       this.updateFormAndValidation();
     }

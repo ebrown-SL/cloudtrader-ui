@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { throwError, of, Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
 import { MINES } from './mine-data';
 import { IMine } from '../../shared/models/mine.model';
 import { MinePurchase } from '../../shared/models/purchase.model';
