@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { IMine } from '../../../shared/models/mine.model';
 import { CloudMineService } from '../mines.service';
+import { CloudStock } from 'src/app/shared/models/cloud.model';
 
 @Component({
   selector: 'app-mine-detail',
@@ -38,9 +39,14 @@ export class MineDetailComponent implements OnInit {
     this.mineService
       .getUserStock()
       .subscribe();
-    this.mineService.currentUserStock.subscribe(userStock => {
-      let stockValue = userStock.find(cloud => cloud.mineId === id);
-      this.userStock = stockValue ? stockValue.stock : 0;
+    this.mineService.currentUserStock.subscribe((userStock: CloudStock[]) => {
+      if (!userStock) {
+        this.userStock = 0;
+      } else {
+        console.log(userStock)
+        let stockValue = userStock.find(cloud => cloud.mineId === id);
+        this.userStock = stockValue ? stockValue.stock : 0;
+      }
     });
   }
 
