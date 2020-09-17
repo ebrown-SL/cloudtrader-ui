@@ -5,14 +5,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { MINES } from './mine-data';
 import { IMine } from '../../shared/models/mine.model';
 import { MinePurchase } from '../../shared/models/purchase.model';
-import { CloudStock } from 'src/app/shared/models/cloud.model';
+import { CloudStock, CloudStockResponseModel } from 'src/app/shared/models/cloud.model';
 import { STOCK_DATA } from './stock-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CloudMineService {
-  private currentUserStockSubject = new BehaviorSubject<CloudStock[]>(JSON.parse(localStorage.getItem('currentUserStock')));
+  private currentUserStockSubject = new BehaviorSubject<CloudStock[]>([]);
   public readonly currentUserStock = this.currentUserStockSubject.asObservable();
 
   constructor(private httpClient: HttpClient) { }
@@ -44,12 +44,11 @@ export class CloudMineService {
         catchError(this.handleError)
       );
   }
-  getUserStock(): Observable<CloudStock[]> {
+  getUserStock(): Observable<CloudStockResponseModel> {
     return this.httpClient.get('/User/current/stock')
       .pipe(
-        tap((userStock: CloudStock[]) => {
-          localStorage.setItem('currentUserStock', JSON.stringify(userStock));
-          this.currentUserStockSubject.next(userStock);
+        tap((userStock: CloudStockResponseModel) => {
+          this.currentUserStockSubject.next(userStock.cloudStock);
         }),
         catchError(this.handleError)
       );
@@ -71,7 +70,6 @@ export class CloudMineService {
     return of(STOCK_DATA())
       .pipe(
         tap((userStock: CloudStock[]) => {
-          localStorage.setItem('currentUserStock', JSON.stringify(userStock));
           this.currentUserStockSubject.next(userStock);
         }));
   }

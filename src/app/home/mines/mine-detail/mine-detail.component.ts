@@ -40,10 +40,9 @@ export class MineDetailComponent implements OnInit {
       .getUserStock()
       .subscribe();
     this.mineService.currentUserStock.subscribe((userStock: CloudStock[]) => {
-      if (!userStock) {
+      if (!userStock || userStock.length === 0) {
         this.userStock = 0;
       } else {
-        console.log(userStock)
         let stockValue = userStock.find(cloud => cloud.mineId === id);
         this.userStock = stockValue ? stockValue.stock : 0;
       }

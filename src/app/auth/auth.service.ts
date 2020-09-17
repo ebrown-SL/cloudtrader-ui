@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../shared/models/user.model';
 import { Credentials } from '../shared/models/credentials.model';
-import { CloudStock } from '../shared/models/cloud.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +36,6 @@ export class AuthService {
     return this.httpClient.post(`/authentication/register`, credentials)
       .pipe(tap((user: User) => {
         localStorage.setItem('currentUser', JSON.stringify(user));
-        let userStock: CloudStock[] = [];
-        localStorage.setItem('currentUserStock', JSON.stringify(userStock));
         this.currentUserSubject.next(user);
       }));
   }
@@ -47,8 +44,6 @@ export class AuthService {
     return this.httpClient.post(`/authentication/login`, credentials)
       .pipe(tap((user: User) => {
         localStorage.setItem('currentUser', JSON.stringify(user));
-        let userStock: CloudStock[] = [];
-        localStorage.setItem('currentUserStock', JSON.stringify(userStock));
         this.currentUserSubject.next(user);
       }));
   }
