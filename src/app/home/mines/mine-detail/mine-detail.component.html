@@ -1,31 +1,42 @@
-<div class="header">
-  <h1>Mine details</h1>
-  <button class="btn btn-secondary back" (click)="back()">Back</button>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <h3>Name</h3>
-    <span>{{ mine.name }}</span>
+<div *ngIf="mine">
+  <div class="header">
+    <h1>{{mine.name | uppercase}} Mine Details</h1>
+    <button class="btn btn-secondary back" (click)="back()">Back</button>
   </div>
-  <div class="col-md-4">
-    <h3>Stock</h3>
-    <span>{{ mine.stock }}</span>
-  </div>
-  <div class="col-md-4">
-    <h3>Temperature</h3>
-    <span>{{ mine.temperature | number: '1.1-1' }}</span>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <h3>Location</h3>
-    <div class="coordinates">
-      <span>Latitude: {{ mine.coordinates.latitude }}</span>
-      <span>Longitude: {{ mine.coordinates.longitude }}</span>
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Name</h3>
+      <span>{{ mine.name }}</span>
+    </div>
+    <div class="col-md-4">
+      <h3>Stock</h3>
+      <span>{{ mine.stock }}</span>
+    </div>
+    <div class="col-md-4">
+      <h3>Temperature</h3>
+      <span>{{ mine.temperature | number: '1.1-1' }}</span>
     </div>
   </div>
-  <div class="col-md-8">
-    <h3>Buy</h3>
-    <app-mine-buy [mine]="mine"></app-mine-buy>
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Location</h3>
+      <div class="coordinates">
+        <span>Latitude: {{ mine.coordinates.latitude }}</span>
+        <span>Longitude: {{ mine.coordinates.longitude }}</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>Price</h3>
+      <span>{{ mine.price | currency:'GBP'}}</span>
+    </div>
+    <div class="col-md-4">
+      <h3>My stock</h3>
+      <span>{{userStock | number}}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class='col'>
+      <app-mine-buy [mine]="mine"></app-mine-buy>
+    </div>
   </div>
 </div>

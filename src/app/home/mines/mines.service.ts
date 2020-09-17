@@ -1,36 +1,61 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError, of, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { throwError, of, Observable, BehaviorSubject } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { MINES } from './mine-data';
 import { IMine } from '../../shared/models/mine.model';
-import { AuthService } from 'src/app/auth/auth.service';
+import { MinePurchase } from '../../shared/models/purchase.model';
+import { CloudStock, CloudStockResponseModel } from 'src/app/shared/models/cloud.model';
+import { STOCK_DATA } from './stock-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CloudMineService {
-  constructor(private httpClient: HttpClient, private authService: AuthService) {}
+  private currentUserStockSubject = new BehaviorSubject<CloudStock[]>([]);
+  public readonly currentUserStock = this.currentUserStockSubject.asObservable();
+
+  constructor(private httpClient: HttpClient) { }
 
   getCloudMines(): Observable<IMine[]> {
     return this.httpClient
-      .get<IMine[]>(`${environment.baseUrl}/api/mine`)
-      .pipe(catchError(this.handleError));
+      .get<IMine[]>(`/mine`)
+      .pipe(
+        map(data => data['mines']),
+        catchError(this.handleError));
   }
 
-  getCloudMine(mine: IMine | string): Observable<IMine> {
-    // TODO expose endpoint in main API
-    return;
+  getCloudMine(mineId: string): Observable<IMine> {
+    return this.httpClient.get<IMine>(`/mine/${mineId}`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-  buyStock(mine: IMine | string, stock: number): Observable<any> {
-    // TODO expose endpoint in main API
-    return of(mine);
+  buyStock(mine: IMine, stock: number): Observable<any> {
+    const purchaseAmount = mine.price * stock;
+    const transaction: MinePurchase = {
+      mineId: mine.id,
+      quantity: stock,
+      purchaseAmount
+    }
+    return this.httpClient.post((`/User/current/stock/buy`), transaction)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  getUserStock(): Observable<CloudStockResponseModel> {
+    return this.httpClient.get('/User/current/stock')
+      .pipe(
+        tap((userStock: CloudStockResponseModel) => {
+          this.currentUserStockSubject.next(userStock.cloudStock);
+        }),
+        catchError(this.handleError)
+      );
   }
 
   /* LOCAL METHODS */
-  
+
   getLocalCloudMine(mine: IMine | string): Observable<IMine> {
     const id = typeof mine === 'string' ? mine : mine.id;
     return of(MINES.find((mine) => mine.id == id));
@@ -38,6 +63,15 @@ export class CloudMineService {
 
   getLocalCloudMines(): Observable<IMine[]> {
     return of(MINES);
+  }
+
+  getLocalUserStock(): Observable<CloudStock[]> {
+    console.log(STOCK_DATA());
+    return of(STOCK_DATA())
+      .pipe(
+        tap((userStock: CloudStock[]) => {
+          this.currentUserStockSubject.next(userStock);
+        }));
   }
 
   /* END LOCAL METHODS */

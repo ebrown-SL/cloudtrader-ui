@@ -2,15 +2,15 @@ import { IMine } from 'src/app/shared/models/mine.model';
 
 export const MINES: IMine[] = [
   {
-    id: '777ea804-c198-4e04-8791-91242b883aa9',
+    id: 'f927d68d-6909-4992-aab5-3f56ff2ac394',
     coordinates: {
-      latitude: 51.454514,
-      longitude: -2.58791,
+      latitude: 17.38272783,
+      longitude: 98.27772635
     },
-    temperature: 30,
-    stock: 397,
+    temperature: 21,
+    stock: 234,
     price: 10,
-    name: 'Bristol',
+    name: 'Bristol'
   },
   {
     id: '3fa74ee7-fe67-46c8-bd9c-4791de9602e6',
