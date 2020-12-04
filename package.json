@@ -7,6 +7,7 @@
     "build": "ng build",
     "buildp": "ng build --prod",
     "test": "ng test",
+    "test:ci": "ng test --karmaConfig karma.conf.ci.js --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "mock:server": "cd e2e/mock-server && npm start",
@@ -45,6 +46,7 @@
     "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "~7.0.0",
+    "puppeteer": "^5.5.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
